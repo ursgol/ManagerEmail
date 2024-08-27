@@ -1,0 +1,68 @@
+﻿@model ManagerEmail.Models.ViewModels.EditEmailViewModel
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<h3>Send Email to your recipient</h3>
+<div class="row">
+
+    <div class="col-lg-6">
+        @using (Html.BeginForm("Email", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+            @Html.ValidationSummary();
+
+
+            <p class="alert alert-info mt-4 mb-4">
+                Pola tytuł, wiadomość, adresat są
+                <strong>wymagane</strong>.
+            </p>
+
+
+
+            @Html.HiddenFor(x => x.Email.Id)
+            @Html.HiddenFor(x => x.Email.UserId)
+
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Email.Title)
+                @Html.TextBoxFor(x => x.Email.Title,
+                new { @class = "form-control", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(x => x.Email.Title, "", new { @class = "text-danger" })
+
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Email.Recipient)
+                @Html.TextBoxFor(x => x.Email.Recipient,
+                new { @class = "form-control", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(x => x.Email.Recipient, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Email.Message)
+                @Html.TextAreaFor(x => x.Email.Message,
+                new { @class = "form-control", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(x => x.Email.Message, "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+
+            <button class="btn btn-primary btn-lg mb-5" type="submit">
+                Send and Save
+            </button>
+        }
+    </div>
+
+
+
+
+</div>
+
